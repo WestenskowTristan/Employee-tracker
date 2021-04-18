@@ -9,6 +9,7 @@ const db = mysql.createConnection(
     //Your MySQL password
     password: "Frublsnap12",
     database: "teamtracker",
+    multipleStatements: true,
   },
   console.log("Connected to the teamtracker database.")
 );

@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const db = require("./db/connection");
 const cTable = require("console.table");
 
-const updateEmployees = () => {
+const updateTeamtracker = () => {
   return inquirer
     .prompt({
       type: "list",
@@ -24,7 +24,7 @@ const updateEmployees = () => {
         db.query(`SELECT * FROM department`, (err, rows) => {
           if (err) throw err;
           console.table(rows);
-          updateEmployees();
+          updateTeamtracker();
         });
       } else if (nextAction.starterAction === "View all roles") {
         db.query(
@@ -34,7 +34,7 @@ const updateEmployees = () => {
           (err, rows) => {
             if (err) throw err;
             console.table(rows);
-            updateEmployees();
+            updateTeamtracker();
           }
         );
       } else if (nextAction.starterAction === "View all employees") {
@@ -47,7 +47,7 @@ const updateEmployees = () => {
           (err, rows) => {
             if (err) throw err;
             console.table(rows);
-            updateEmployees();
+            updateTeamtracker();
           }
         );
       } else if (nextAction.starterAction === "Add a department") {
@@ -66,10 +66,10 @@ const updateEmployees = () => {
               (err, result) => {
                 if (err) {
                   console.log("Department already exists");
-                  updateEmployees();
+                  updateTeamtracker();
                 } else {
                   console.log(`${param} has been added`);
-                  updateEmployees();
+                  updateTeamtracker();
                 }
               }
             );
@@ -78,7 +78,7 @@ const updateEmployees = () => {
         db.query(`SELECT DISTINCT * FROM department`, (err, row) => {
           if (err) {
             console.log(`Error: ${err}`);
-            updateEmployees();
+            updateTeamtracker();
           } else {
             return inquirer
               .prompt([
@@ -111,7 +111,7 @@ const updateEmployees = () => {
                   (err, row) => {
                     if (err) {
                       console.log(`Error: ${err}`);
-                      updateEmployees();
+                      updateTeamtracker();
                     } else {
                       let departmentId = row[0].id;
                       const param = [
@@ -128,12 +128,12 @@ const updateEmployees = () => {
                             console.log(
                               "Role may already exist or salary is not a decimal number"
                             );
-                            updateEmployees();
+                            updateTeamtracker();
                           } else {
                             console.log(
                               `The ${newRole.title} role has been added to the ${newRole.department} department`
                             );
-                            updateEmployees();
+                            updateTeamtracker();
                           }
                         }
                       );
@@ -148,7 +148,7 @@ const updateEmployees = () => {
         db.query(sql, (err, row) => {
           if (err) {
             console.log(`Error: ${err}`);
-            updateEmployees();
+            updateTeamtracker();
           } else {
             return inquirer
               .prompt([
@@ -190,7 +190,7 @@ const updateEmployees = () => {
                   db.query(sql, param, (err, row) => {
                     if (err) {
                       console.log(`Error: ${err}`);
-                      updateEmployees();
+                      updateTeamtracker();
                     } else {
                       let roleId = row[0].id;
                       const param = [
@@ -206,12 +206,12 @@ const updateEmployees = () => {
                         (err, result) => {
                           if (err) {
                             console.log(`Error: ${err}`);
-                            updateEmployees();
+                            updateTeamtracker();
                           } else {
                             console.log(
                               `${newEmployee.firstName} ${newEmployee.lastName} has been added`
                             );
-                            updateEmployees();
+                            updateTeamtracker();
                           }
                         }
                       );
@@ -228,7 +228,7 @@ const updateEmployees = () => {
                   db.query(sql, param, (err, row) => {
                     if (err) {
                       console.log(`Error: ${err}`);
-                      updateEmployees();
+                      updateTeamtracker();
                     } else {
                       let roleId = row[0][0].id;
                       let managerId = row[1][0].id;
@@ -245,12 +245,12 @@ const updateEmployees = () => {
                         (err, result) => {
                           if (err) {
                             console.log(`Error: ${err}`);
-                            updateEmployees();
+                            updateTeamtracker();
                           } else {
                             console.log(
                               `${newEmployee.firstName} ${newEmployee.lastName} has been added`
                             );
-                            updateEmployees();
+                            updateTeamtracker();
                           }
                         }
                       );
@@ -265,7 +265,7 @@ const updateEmployees = () => {
         db.query(sql, (err, row) => {
           if (err) {
             console.log(`Error: ${err}`);
-            updateEmployees();
+            updateTeamtracker();
           } else {
             return inquirer
               .prompt([
@@ -301,7 +301,7 @@ const updateEmployees = () => {
                 db.query(sql, param, (err, row) => {
                   if (err) {
                     console.log(`Error: ${err}`);
-                    updateEmployees();
+                    updateTeamtracker();
                   } else {
                     let roleId = row[0][0].id;
                     let employeeId = row[1][0].id;
@@ -312,12 +312,12 @@ const updateEmployees = () => {
                       (err, result) => {
                         if (err) {
                           console.log(`Error: ${err}`);
-                          updateEmployees();
+                          updateTeamtracker();
                         } else {
                           console.log(
                             `${newEmployeeRole.employee}'s role has been changed to ${newEmployeeRole.role}`
                           );
-                          updateEmployees();
+                          updateTeamtracker();
                         }
                       }
                     );
@@ -335,4 +335,4 @@ const updateEmployees = () => {
     });
 };
 
-updateEmployees();
+updateTeamtracker();
