@@ -14,7 +14,7 @@ VALUES
 ('President of Sales', 80.000, 2),
 ('Accountant Executive', 200.000, 2);
 
-INSERT INTO employee (first_name, last_name, role_id, department_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
  ('James', 'Fraser', 2, 2),
   ('Jack', 'London', 1, 1),
